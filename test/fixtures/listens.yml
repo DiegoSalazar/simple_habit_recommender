@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: MyString
+  listen_date: 2017-01-24 19:02:54
+  subtopic_id: MyString
+
+two:
+  user_id: MyString
+  listen_date: 2017-01-24 19:02:54
+  subtopic_id: MyString
