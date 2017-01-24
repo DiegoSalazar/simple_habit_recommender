@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  subtopic_id: MyString
+  name: MyString
+  description: MyText
+
+two:
+  subtopic_id: MyString
+  name: MyString
+  description: MyText
