@@ -82,23 +82,22 @@ The deliverable here will be a server that will service one route: /recommendati
 
 ## Getting Started
 
-1. Install Rails at the command prompt if you haven't yet:
+1. At the command prompt, clone this repo
 
-        $ gem install rails
+        $ git clone git@github.com:DiegoSalazar/simple_habit_recommender.git
+        $ cd simple_habit_recommender
 
-2. At the command prompt, create a new Rails application:
+2. Setup the app
 
-        $ rails new myapp
+        $ rake db:setup
+        $ rake load:reload
 
-   where "myapp" is the application name.
+3. Change directory to `simple_habit_recommender`, load the data, and start the web server:
 
-3. Change directory to `myapp`, load the data, and start the web server:
-
-        $ cd myapp
+        $ cd simple_habit_recommender
+        $ rake db:setup
         $ rake load:sub_topics load:listens load:users
         $ rails server
-
-   Run with `--help` or `-h` for options.
 
 4. Using a browser, go to `http://localhost:3000`
 
