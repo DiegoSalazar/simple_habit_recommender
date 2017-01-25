@@ -8,16 +8,16 @@ class RecommendationsController < ApplicationController
     end
 
     if @error.present?
-      
       respond_to do |format|
         format.html do
           flash[:alert] = @error
-          redirect_to root_path and return
+          redirect_to root_path
         end
         format.json do
-          render json: @error, status: :not_found and return
+          render json: @error, status: :not_found
         end
       end
+      return
     end
 
     per = params.fetch :per, 4
