@@ -3,8 +3,6 @@
   = succeed ", you might also like..." do
     = link_to @sub_topic.name, sub_topic_path(@sub_topic)
 
-- sub_topics = @recommender.ask
-
 .well
   %table.table.table-striped.table-hover
     %thead
@@ -12,10 +10,10 @@
         %th SubTopic
         %th Listens
     %tbody
-      - sub_topics.each do |subtopic_id, listens|
+      - @recommendations.each do |subtopic_id, listens|
         - sub_topic = SubTopic.find_by_subtopic_id subtopic_id
         %tr
           %td= link_to sub_topic.name, sub_topic
           %td= listens
 
-= paginate sub_topics
+= paginate @recommendations

@@ -1,17 +1,23 @@
 class RecommendationsController < ApplicationController
   def index
-    if params[:subtopic].blank?
+    if params[:subtopic].strip.blank?
       flash[:alert] = "Please provide a subtopic parameter: '/recommendations?subtopic=X' or paste the subtopic into the search field above."
       redirect_to root_path and return
     end
 
-    @sub_topic = SubTopic.find_by_subtopic_id params[:subtopic]
-    @recommender = Recommender.new @sub_topic.subtopic_id, params.fetch(:per, 4), params[:page]
+    per = params.fetch :per, 4
+    page = params[:page]
+    results = Recommender.new(params[:subtopic]).solve
+    @recommendations = Kaminari.paginate_array(results).page(page).per per
 
     respond_to do |format|
-      format.html
+      format.html do
+        @sub_topic = SubTopic.find_by_subtopic_id params[:subtopic]
+      end
+
       format.json do
-        render json: { recommended_subtopics: @recommender.ask.map(&:first) }
+        subtopic_ids = @recommendations.map &:first
+        render json: subtopic_ids
       end
     end
   end

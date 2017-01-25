@@ -59,7 +59,12 @@ namespace :load do
     subtopic_ids = SubTopic.pluck :subtopic_id
     puts "Creating #{subtopic_ids.size} recommendations..."
     
-    subtopic_ids.each { |subtopic_id| Recommender.new(subtopic_id).ask }
+    subtopic_ids.each_with_index do |subtopic_id, i|
+      subtopic = SubTopic.find_by_subtopic_id subtopic_id
+      puts "\tGenerating recommendations for #{subtopic.name}"
+
+      Recommender.new(subtopic_id).solve
+    end
     puts "\aDone."
   end
 end
