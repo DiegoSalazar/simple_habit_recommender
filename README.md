@@ -32,6 +32,20 @@ I created a Rails App to utilize its db tools to load the data from the two json
 
 I then added HTML and styling to display the data and query interface in [a neat little app on Heroku](http://simplehabitrecommender.herokuapp.com).
 
+The core algorithm that gathers recommendations from a given subtopic is:
+
+```sql
+SELECT subtopic_id, COUNT(id) AS listens_count FROM listens
+WHERE listens.user_id IN (
+  SELECT users.user_id FROM users
+  RIGHT JOIN listens ON listens.user_id = users.user_id
+  WHERE listens.subtopic_id = '#{@subtopic_id}'
+) 
+AND listens.subtopic_id != '#{@subtopic_id}'
+GROUP BY subtopic_id
+ORDER BY listens_count DESC
+```
+
 ## Challenge Instructions
 
 For this exercise, we want to be able to build a simple recommendation engine for Simple Habit meditators. To do this, we’ve included a list of all the meditations that have been completed by users on our site — this file is called ‘listens.json’. The format of this file is a JSON array that contains objects that contain three properties:
