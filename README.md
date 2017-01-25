@@ -85,7 +85,6 @@ The deliverable here will be a server that will service one route: /recommendati
 1. At the command prompt, clone this repo
 
         $ git clone git@github.com:DiegoSalazar/simple_habit_recommender.git
-        $ cd simple_habit_recommender
 
 2. Setup the app
 
