@@ -14,7 +14,7 @@ To receive JSON do either:
 
 **Browser**
 
-Add `.json` to the end of the `/recommendations` part of the URL 
+Add `.json` to the end of the `/recommendations` part of the URL:
 
 e.g. http://simplehabitrecommender.herokuapp.com/recommendations.json?subtopic=X
 
