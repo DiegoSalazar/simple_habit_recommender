@@ -1,0 +1,22 @@
+!!!
+%html
+  %head
+    %meta{content: "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title Simple Habit Recommender
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+    %meta{content: "width=device-width, initial-scale=1", name: "viewport"}/
+  %body
+    .container
+      = render partial: "elements/navbar"
+      
+      .row
+        .col-sm-12
+          = bootstrap_flash
+          = yield
+          %hr
+          
+    %footer.footer
+      .container
+        %p.text-muted Diego Salazar &copy; 2017

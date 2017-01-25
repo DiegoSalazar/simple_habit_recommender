@@ -1,0 +1,6 @@
+%tr
+  %td= link_to listen.sub_topic.name, sub_topic_path(listen.sub_topic.id)
+  - if @user.nil?
+    %td= link_to listen.user_id, user_path(listen.user.id)
+  %td=l listen.listen_date
+  %td= link_to "Recommendations", recommendations_path(subtopic: listen.subtopic_id)

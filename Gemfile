@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-
+ruby "2.3.0"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.4'
@@ -39,12 +39,16 @@ gem 'spring',        group: :development
 # gem 'debugger', group: [:development, :test]
 
 gem 'bundler'
-
+gem 'rails_12factor'
 gem 'bootstrap-sass', '3.3.5'
 gem 'bootstrap-sass-extras'
 gem 'binding_of_caller'
 gem 'tzinfo-data'
 gem 'validates_formatting_of'
+gem 'haml-rails'
+gem 'kaminari'
+gem 'bootstrap-kaminari-views'
+gem 'bulk_insert'
 
 group :development do
   gem 'pry-rails'

@@ -1,0 +1,29 @@
+%nav.navbar.navbar-default
+  .container-fluid
+    / Brand and toggle get grouped for better mobile display
+    .navbar-header
+      %button.navbar-toggle.collapsed{"aria-expanded" => "false", "data-target" => "#bs-example-navbar-collapse-1", "data-toggle" => "collapse", type: "button"}
+        %span.sr-only Toggle navigation
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      %a.navbar-brand{href: "#"} Simple Habit Recommender
+
+    #bs-example-navbar-collapse-1.collapse.navbar-collapse
+      %ul.nav.navbar-nav
+        %li{class: ("active" if current_page?(controller: 'sub_topics') || current_page?(root_path))}
+          %a{href: "/"} SubTopics
+        %li{class: ("active" if current_page?(controller: 'listens'))}
+          %a{href: listens_path} Listens
+        %li{class: ("active" if current_page?(controller: 'users'))}
+          %a{href: users_path} Users
+        %li{class: ("active" if current_page?(controller: 'recommendations'))}
+          %a{href: recommendations_path} Recommendations
+        
+      %form.navbar-form.navbar-left{action: recommendations_path}
+        .form-group
+          %input.form-control{value: params[:subtopic], placeholder: "Search by Subtopic", type: "text", name: "subtopic"}/
+        %button.btn.btn-default{type: "submit"} Submit
+      
+    / /.navbar-collapse
+  / /.container-fluid

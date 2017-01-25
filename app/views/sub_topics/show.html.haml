@@ -1,0 +1,14 @@
+%h1= @sub_topic.name
+
+%p.help-block
+  SubTopic ID: 
+  = @sub_topic.subtopic_id
+
+.well
+  %p= @sub_topic.description
+
+.btn-group{role: "group"}
+  %button{type: "button", class: "btn btn-default"}
+    = link_to "Back", sub_topics_path
+  %button{type: "button", class: "btn btn-info"}
+    = link_to "Recommendations", recommendations_path(subtopic: @sub_topic.subtopic_id)

@@ -1,0 +1,5 @@
+%li.list-group-item
+  %h4.list-group-item-heading= link_to sub_topic.name, sub_topic
+  .list-group-item-text
+    %p= sub_topic.description
+    = link_to "Recommendations", recommendations_path(subtopic: sub_topic.subtopic_id)

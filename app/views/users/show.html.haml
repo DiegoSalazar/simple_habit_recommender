@@ -1,0 +1,6 @@
+%h1 User
+%p= @user.user_id
+
+%h3= pluralize @user.listens.count, "Listens"
+
+= render partial: "listens/list", locals: { listens: @user.listens.page(params[:page]) }

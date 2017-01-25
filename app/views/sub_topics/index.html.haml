@@ -1,0 +1,11 @@
+- content_for :pagination do
+  = paginate @sub_topics
+
+%h1 SubTopics
+
+= content_for :pagination
+
+%ul.list-group
+  = render @sub_topics
+
+= content_for :pagination

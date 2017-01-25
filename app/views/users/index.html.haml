@@ -1,0 +1,11 @@
+- content_for :pagination do
+  = paginate @users
+
+%h1 Users
+
+= content_for :pagination
+
+%ul.list-group
+  = render @users
+
+= content_for :pagination

@@ -1,0 +1,17 @@
+- content_for :pagination do
+  = paginate listens
+
+= content_for :pagination
+
+%table.table.table-striped.table-hover
+  %thead
+    %tr
+      %th Sub Topic
+      - if @user.nil?
+        %th User
+      %th Listen Date
+      %th
+  %tbody
+    = render listens
+
+= content_for :pagination
