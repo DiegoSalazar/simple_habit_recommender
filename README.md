@@ -28,9 +28,9 @@ curl -H"ACCEPT: application/json" http://simplehabitrecommender.herokuapp.com/re
 
 ## How I solved the challenge
 
-I created a Rails App to utilize its db tools to load the data from the two json files in `lib/data`. I designed the data relational data schema to define the relationship between the Sub Topics, Listens, and Users. I then wrote I SQL query with some Ruby post processing to display the top four recommendations for sub topics that users who also listened to the queried sub topic have also listened to.
+I created a Rails App to utilize its db tools to load the data from the two json files in `lib/data`. I designed the relational data schema to define the relationship between the Sub Topics, Listens, and Users. I then wrote a SQL query and some Ruby post processing code to display the top four recommendations for sub topics that users who also listened to the queried sub topic have also listened to.
 
-I then added HTML and styling display the data and query interface in a neat little app on Heroku.
+I then added HTML and styling to display the data and query interface in [a neat little app on Heroku](http://simplehabitrecommender.herokuapp.com).
 
 ## Challenge Instructions
 
