@@ -1,6 +1,6 @@
 class RecommendationsController < ApplicationController
   def index
-    if params[:subtopic].strip.blank?
+    if params[:subtopic].to_s.strip.blank?
       flash[:alert] = "Please provide a subtopic parameter: '/recommendations?subtopic=X' or paste the subtopic into the search field above."
       redirect_to root_path and return
     end
