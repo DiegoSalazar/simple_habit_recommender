@@ -92,22 +92,17 @@ The deliverable here will be a server that will service one route: /recommendati
 
    where "myapp" is the application name.
 
-3. Change directory to `myapp` and start the web server:
+3. Change directory to `myapp`, load the data, and start the web server:
 
         $ cd myapp
+        $ rake load:sub_topics load:listens load:users
         $ rails server
 
    Run with `--help` or `-h` for options.
 
-4. Using a browser, go to `http://localhost:3000` and you'll see:
-"Yay! You’re on Rails!"
+4. Using a browser, go to `http://localhost:3000`
 
-5. Follow the guidelines to start developing your application. You may find
-   the following resources handy:
-    * [Getting Started with Rails](http://guides.rubyonrails.org/getting_started.html)
-    * [Ruby on Rails Guides](http://guides.rubyonrails.org)
-    * [The API Documentation](http://api.rubyonrails.org)
-    * [Ruby on Rails Tutorial](http://www.railstutorial.org/book)
+5. Click on Recommendations under any sub topic for recommendations on that sub topic
 
 ## License
 
