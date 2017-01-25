@@ -2,24 +2,6 @@ namespace :load do
   DATA_FILE = ENV.fetch "DATA_FILE", "./lib/data/listens.json"
   SUBTOPIC_FILE = ENV.fetch "SUBTOPIC_FILE", "./lib/data/subtopics.json"
 
-  desc "Load the listens.json file into the db"
-  task listens: :environment do
-    listens = JSON.parse File.read DATA_FILE
-    puts "Loading #{listens.size} listen records..."
-
-    Listen.bulk_insert do |worker|
-      listens.each do |listen|
-        worker.add({
-          subtopic_id: listen["subtopic"],
-          listen_date: listen["listenDate"],
-          user_id: listen["user"]
-        })
-      end
-    end
-
-    puts "\aDone."
-  end
-
   desc "Load the subtopics.json file into the db"
   task sub_topics: :environment do
     sub_topics = JSON.parse File.read SUBTOPIC_FILE
@@ -31,6 +13,24 @@ namespace :load do
           name: sub_topic["name"],
           description: sub_topic["description"],
           subtopic_id: sub_topic["id"]
+        })
+      end
+    end
+
+    puts "\aDone."
+  end
+
+  desc "Load the listens.json file into the db"
+  task listens: :environment do
+    listens = JSON.parse File.read DATA_FILE
+    puts "Loading #{listens.size} listen records..."
+
+    Listen.bulk_insert do |worker|
+      listens.each do |listen|
+        worker.add({
+          subtopic_id: listen["subtopic"],
+          listen_date: listen["listenDate"],
+          user_id: listen["user"]
         })
       end
     end
@@ -50,6 +50,16 @@ namespace :load do
 
   desc "Clear listens, sub_topics, and users tables"
   task reset: :environment do
-    [Listen, SubTopic, User].map &:delete_all
+    puts "Deleting all data..."
+    [Recommendation, Listen, SubTopic, User].map &:delete_all
+    
+    puts "Loading all data..."
+    %w[sub_topics listens users].each { |task| Rake::Task["load:#{task}"].invoke }
+
+    subtopic_ids = SubTopic.pluck :subtopic_id
+    puts "Creating #{subtopic_ids.size} recommendations..."
+    
+    subtopic_ids.each { |subtopic_id| Recommender.new(subtopic_id).ask }
+    puts "\aDone."
   end
 end

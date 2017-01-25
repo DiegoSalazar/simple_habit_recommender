@@ -6,7 +6,7 @@ class RecommendationsController < ApplicationController
     end
 
     @sub_topic = SubTopic.find_by_subtopic_id params[:subtopic]
-    @recommender = Recommender.new @sub_topic, params.fetch(:per, 4), params[:page]
+    @recommender = Recommender.new @sub_topic.subtopic_id, params.fetch(:per, 4), params[:page]
 
     respond_to do |format|
       format.html

@@ -1,6 +1,6 @@
 class Recommender
-  def initialize(sub_topic, per = 4, page = 0)
-    @sub_topic, @per, @page = sub_topic, per, page
+  def initialize(subtopic_id, per = 4, page = 0)
+    @subtopic_id, @per, @page = sub_topic, per, page
   end
 
   def ask
@@ -9,7 +9,7 @@ class Recommender
     else
       get_sub_topics.tap do |sub_topics|
         Recommendation.create({
-          subtopic_id: @sub_topic.subtopic_id,
+          subtopic_id: @subtopic_id,
           recommended_subtopic_ids: sub_topics.map { |s, l| [s, l.size] }
         })
       end
@@ -19,7 +19,7 @@ class Recommender
   end
 
   def get_recommendation
-    @recommendation ||= Recommendation.find_by_subtopic_id @sub_topic.subtopic_id
+    @recommendation ||= Recommendation.find_by_subtopic_id @subtopic_id
   end
 
   def get_sub_topics
@@ -27,7 +27,7 @@ class Recommender
     
     users_also_listened.each do |user|
       user.listens.each do |listen|
-        next if listen.subtopic_id == @sub_topic.subtopic_id
+        next if listen.subtopic_id == @subtopic_id
         sub_topics[listen.subtopic_id] ||= []
         sub_topics[listen.subtopic_id] << listen
       end
@@ -36,6 +36,6 @@ class Recommender
   end
 
   def users_also_listened
-    User.who_listened_to(@sub_topic.subtopic_id)
+    User.who_listened_to(@subtopic_id)
   end
 end
