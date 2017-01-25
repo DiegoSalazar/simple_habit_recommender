@@ -1,6 +1,6 @@
 class Recommender
   def initialize(subtopic_id, per = 4, page = 0)
-    @subtopic_id, @per, @page = sub_topic, per, page
+    @subtopic_id, @per, @page = subtopic_id, per, page
   end
 
   def ask
