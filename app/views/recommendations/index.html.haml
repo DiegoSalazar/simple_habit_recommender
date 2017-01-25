@@ -9,11 +9,13 @@
       %tr
         %th SubTopic
         %th Listens
+        %th
     %tbody
       - @recommendations.each do |recommendation|
         - sub_topic = SubTopic.find_by_subtopic_id recommendation["subtopic_id"]
         %tr
           %td= link_to sub_topic.name, sub_topic
           %td= recommendation["listens_count"]
+          %td= link_to "Recommendations", recommendations_path(subtopic: sub_topic.subtopic_id)
 
 = paginate @recommendations
