@@ -1,12 +1,23 @@
 class RecommendationsController < ApplicationController
   def index
     if params[:subtopic].to_s.strip.blank?
-      flash[:alert] = "Please provide a subtopic parameter: '/recommendations?subtopic=X' or paste the subtopic into the search field above."
-      redirect_to root_path and return
+      @error = "Please provide a subtopic parameter: '/recommendations?subtopic=X' or paste the subtopic into the search field above."
     end
     unless SubTopic.where(subtopic_id: params[:subtopic]).exists?
-      flash[:alert] = "Invalid subtopic"
-      redirect_to root_path and return
+      @error = "Invalid subtopic"
+    end
+
+    if @error.present?
+      
+      respond_to do |format|
+        format.html do
+          flash[:alert] = @error
+          redirect_to root_path and return
+        end
+        format.json do
+          render json: @error, status: :not_found and return
+        end
+      end
     end
 
     per = params.fetch :per, 4
