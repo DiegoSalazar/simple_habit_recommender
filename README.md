@@ -8,7 +8,7 @@ This project is my solution to the Simple Habit interview challenge to build a s
 
 ## Usage
 
-Go to `http://simplehabitrecommender.herokuapp.com/recommendations?subtopic=X` where **X** is the ID of one of the topics in `[lib/data/subtopics.json](https://github.com/DiegoSalazar/simple_habit_recommender/blob/master/lib/data/subtopics.json)`. You will receive either an HTML page or JSON response depending on how the request is fired.
+Go to `http://simplehabitrecommender.herokuapp.com/recommendations?subtopic=X` where **X** is the ID of one of the topics in [lib/data/subtopics.json](https://github.com/DiegoSalazar/simple_habit_recommender/blob/master/lib/data/subtopics.json). You will receive either an HTML page or JSON response depending on how the request is fired.
 
 To receive JSON do either: 
 
@@ -28,7 +28,7 @@ curl -H"ACCEPT: application/json" http://simplehabitrecommender.herokuapp.com/re
 
 I created a Rails App to utilize its db tools to load the data from the two json files in `lib/data`. I designed the data relational data schema to define the relationship between the Sub Topics, Listens, and Users. I then wrote I SQL query with some Ruby post processing to display the top four recommendations for sub topics that users who also listened to the queried sub topic have also listened to.
 
-I then added HTML and styling to display the data and query interface in a neat little app on Heroku.
+I then added HTML and styling display the data and query interface in a neat little app on Heroku.
 
 ## Challenge Instructions
 
