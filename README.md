@@ -89,8 +89,7 @@ The deliverable here will be a server that will service one route: /recommendati
 2. Setup the app
 
         $ cd simple_habit_recommender
-        $ rake db:setup
-        $ rake load:reload
+        $ rake db:setup load:reload
 
 3. Start the web server:
 
