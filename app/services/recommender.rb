@@ -8,8 +8,8 @@ class Recommender
       r.recommended_subtopic_ids
     else
       sub_topics = get_sub_topics
-      create_recommendation_for sub_topics
-      sub_topics
+      recommendation = create_recommendation_for sub_topics
+      recommendation.recommended_subtopic_ids
     end
   end
 
@@ -23,13 +23,13 @@ class Recommender
         sub_topics[listen.subtopic_id] << listen
       end
       sub_topics
-    end.sort_by { |_, listens| listens.size }.reverse
+    end.sort_by { |subtopic_id, listens| listens.size }.reverse
   end
 
   def create_recommendation_for(sub_topics)
-    Recommendation.create({
-      subtopic_id: @subtopic_id,
-      recommended_subtopic_ids: sub_topics.map { |sid, listens| [sid, listens.size] }
-    })
+    Recommendation.find_or_create_by(subtopic_id: @subtopic_id).tap do |r|
+      r.recommended_subtopic_ids ||= sub_topics.map { |sid, listens| [sid, listens.size] }
+      r.save if r.changes.any?
+    end
   end
 end
