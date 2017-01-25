@@ -4,6 +4,10 @@ class RecommendationsController < ApplicationController
       flash[:alert] = "Please provide a subtopic parameter: '/recommendations?subtopic=X' or paste the subtopic into the search field above."
       redirect_to root_path and return
     end
+    unless SubTopic.where(subtopic_id: params[:subtopic]).exists?
+      flash[:alert] = "Invalid subtopic"
+      redirect_to root_path and return
+    end
 
     per = params.fetch :per, 4
     page = params[:page]
