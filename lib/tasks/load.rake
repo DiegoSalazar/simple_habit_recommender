@@ -48,14 +48,8 @@ namespace :load do
     puts "\aDone."
   end
 
-  desc "Clear listens, sub_topics, and users tables"
-  task reset: :environment do
-    puts "Deleting all data..."
-    [Recommendation, Listen, SubTopic, User].map &:delete_all
-    
-    puts "Loading all data..."
-    %w[sub_topics listens users].each { |task| Rake::Task["load:#{task}"].invoke }
-
+  desc "Generate recommendations from sub_topics"
+  task recommendations: :environment do
     subtopic_ids = SubTopic.pluck :subtopic_id
     total = subtopic_ids.size
     puts "Creating #{total} recommendations..."
@@ -67,6 +61,26 @@ namespace :load do
       Recommender.new(subtopic_id).solve
     end
     puts "\aDone."
+  end
+
+  desc "Delete and reload SubTopics, Listens, and Users"
+  task reload: :environment do
+    puts "Deleting all data..."
+    [Recommendation, Listen, SubTopic, User].map &:delete_all
+    
+    puts "Loading all data..."
+    %w[sub_topics listens users].each { |task| Rake::Task["load:#{task}"].invoke }
+  end
+
+  desc "Clear listens, sub_topics, and users tables"
+  task reset: :environment do
+    Rake::Task["load:reload"].invoke
+    Rake::Task["load:recommendations"].invoke
+  end
+
+  desc "Clear all recommendations"
+  task clear_recommendations: :environment do
+    Recommendation.delete_all
   end
 
   def percent_of(is, of)
