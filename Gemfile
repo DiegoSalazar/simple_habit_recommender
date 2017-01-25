@@ -38,6 +38,7 @@ gem 'spring',        group: :development
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+gem 'puma'
 gem 'bundler'
 gem 'rails_12factor'
 gem 'bootstrap-sass', '3.3.5'
