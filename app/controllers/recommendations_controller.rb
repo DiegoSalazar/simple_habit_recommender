@@ -16,7 +16,7 @@ class RecommendationsController < ApplicationController
       end
 
       format.json do
-        subtopic_ids = @recommendations.map &:first
+        subtopic_ids = @recommendations.map { |r| r["subtopic_id"] }
         render json: subtopic_ids
       end
     end

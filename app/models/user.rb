@@ -17,3 +17,14 @@ class User < ActiveRecord::Base
     where listens: { subtopic_id: subtopic_id }
   }
 end
+
+<<-SQL
+SELECT subtopic_id, COUNT(id) AS listens_count FROM listens
+WHERE listens.user_id IN (
+  SELECT users.user_id FROM users
+  RIGHT JOIN listens ON listens.user_id = users.user_id
+  WHERE listens.subtopic_id = '575f6209a06acf0300140150'
+)
+GROUP BY subtopic_id
+ORDER BY listens_count DESC
+SQL

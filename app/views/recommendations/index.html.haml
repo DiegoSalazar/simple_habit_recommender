@@ -10,10 +10,10 @@
         %th SubTopic
         %th Listens
     %tbody
-      - @recommendations.each do |subtopic_id, listens|
-        - sub_topic = SubTopic.find_by_subtopic_id subtopic_id
+      - @recommendations.each do |recommendation|
+        - sub_topic = SubTopic.find_by_subtopic_id recommendation["subtopic_id"]
         %tr
           %td= link_to sub_topic.name, sub_topic
-          %td= listens
+          %td= recommendation["listens_count"]
 
 = paginate @recommendations
