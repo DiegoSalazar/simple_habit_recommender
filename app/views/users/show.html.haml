@@ -3,4 +3,4 @@
 
 %h3= pluralize @user.listens.count, "Listens"
 
-= render partial: "listens/list", locals: { listens: @user.listens.page(params[:page]) }
+= render partial: "listens/list", locals: { listens: @user.listens.recent.page(params[:page]) }

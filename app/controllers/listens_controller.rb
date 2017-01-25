@@ -1,5 +1,5 @@
 class ListensController < ApplicationController
   def index
-    @listens = Listen.all.page params[:page]
+    @listens = Listen.recent.page params[:page]
   end
 end
