@@ -17,18 +17,18 @@ class Recommender
 
   def get_sub_topics
     User.who_listened_to(@subtopic_id).inject({}) do |sub_topics, user|
-      user.listens.each do |listen|
-        next if listen.subtopic_id == @subtopic_id
-        sub_topics[listen.subtopic_id] ||= []
-        sub_topics[listen.subtopic_id] << listen
+      user.listens.pluck(:subtopic_id).each do |subtopic_id|
+        next if subtopic_id == @subtopic_id
+        sub_topics[subtopic_id] ||= 0
+        sub_topics[subtopic_id] += 1
       end
       sub_topics
-    end.sort_by { |subtopic_id, listens| listens.size }.reverse
+    end.sort_by { |subtopic_id, listens_count| listens_count }.reverse
   end
 
   def create_recommendation_for(sub_topics)
     Recommendation.find_or_create_by(subtopic_id: @subtopic_id).tap do |r|
-      r.recommended_subtopic_ids = sub_topics.map { |sid, listens| [sid, listens.size] }
+      r.recommended_subtopic_ids = sub_topics.map { |sid, listens_count| [sid, listens_count] }
       r.save
     end
   end
