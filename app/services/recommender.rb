@@ -28,7 +28,7 @@ class Recommender
 
   def create_recommendation_for(sub_topics)
     Recommendation.find_or_create_by(subtopic_id: @subtopic_id).tap do |r|
-      r.recommended_subtopic_ids ||= sub_topics.map { |sid, listens| [sid, listens.size] }
+      r.recommended_subtopic_ids = sub_topics.map { |sid, listens| [sid, listens.size] }
       r.save if r.changes.any?
     end
   end

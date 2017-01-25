@@ -57,14 +57,19 @@ namespace :load do
     %w[sub_topics listens users].each { |task| Rake::Task["load:#{task}"].invoke }
 
     subtopic_ids = SubTopic.pluck :subtopic_id
-    puts "Creating #{subtopic_ids.size} recommendations..."
+    total = subtopic_ids.size
+    puts "Creating #{total} recommendations..."
     
     subtopic_ids.each_with_index do |subtopic_id, i|
       subtopic = SubTopic.find_by_subtopic_id subtopic_id
-      puts "\tGenerating recommendations for #{subtopic.name}"
+      puts "\tGenerating recommendations for \"#{subtopic.name}\". #{i+1} of #{total} (#{percent_of i, total}%) done."
 
       Recommender.new(subtopic_id).solve
     end
     puts "\aDone."
+  end
+
+  def percent_of(is, of)
+    sprintf "%.2f", (is + 1).to_f / of.to_f * 100.0
   end
 end
