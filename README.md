@@ -89,14 +89,12 @@ The deliverable here will be a server that will service one route: /recommendati
 
 2. Setup the app
 
+        $ cd simple_habit_recommender
         $ rake db:setup
         $ rake load:reload
 
-3. Change directory to `simple_habit_recommender`, load the data, and start the web server:
+3. Start the web server:
 
-        $ cd simple_habit_recommender
-        $ rake db:setup
-        $ rake load:sub_topics load:listens load:users
         $ rails server
 
 4. Using a browser, go to `http://localhost:3000`
