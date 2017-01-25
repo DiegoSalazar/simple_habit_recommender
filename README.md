@@ -1,6 +1,6 @@
 # Simple Habit Recommender
 
-This project is my solution to the Simple Habit interview challenge to build a simple topic recommender based on data they sent me.
+This project is my solution to the Simple Habit challenge to build a simple topic recommender based on data they sent me.
 
 ## Demo
 
